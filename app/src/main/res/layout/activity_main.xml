@@ -10,7 +10,10 @@
         android:id="@+id/l"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <Button
             android:id="@+id/button"
@@ -28,7 +31,7 @@
             android:layout_marginTop="0dp"
             android:layout_weight="1"
             android:background="#00000000"
-            android:onClick="scissor" />
+            android:onClick="paper" />
 
         <Button
             android:id="@+id/button3"
@@ -37,7 +40,8 @@
             android:layout_marginTop="0dp"
             android:layout_weight="1"
             android:background="#00000000"
-            android:onClick="paper" />
+            android:onClick="scissor" />
+
     </LinearLayout>
 
     <TextView
@@ -74,11 +78,48 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="376dp"
-        android:layout_marginBottom="4dp"
         android:background="#00BF0F0F"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/rock_paper_scissors" />
+
+    <ImageView
+        android:id="@+id/paper"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/paper" />
+
+    <ImageView
+        android:id="@+id/scissors"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/scissors" />
+
+    <ImageView
+        android:id="@+id/rock"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/rock" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

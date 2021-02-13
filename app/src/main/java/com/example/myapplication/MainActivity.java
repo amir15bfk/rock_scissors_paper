@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -23,17 +24,16 @@ public class MainActivity extends AppCompatActivity {
     int computerScore=0,playerScore=0;
     TextView computerTextView,playerTextView;
     LinearLayout l;
+    ImageView Image;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
     }
-    private String getRandom(){
-        int n=rand.nextInt(3)+1;
-        if(n == 1 ){  return "paper";}
-        else if(n == 2 ){  return "scissor";}
-        else{ return "rock";}
+    private int getRandom(){
+        return rand.nextInt(3)+1;
+
     }
     @SuppressLint("SetTextI18n")
     private void updateScore(int computer , int player){
@@ -46,62 +46,46 @@ public class MainActivity extends AppCompatActivity {
         playerTextView.setText("you "+playerScore);
     }
     @SuppressLint("ResourceAsColor")
-    private void whoWon(String player)  {
-        String computer=getRandom();
-        if (computer.equals(player)){
+    private void whoWon(int player)  {
+        int computer=getRandom();
+        l= findViewById(R.id.l);
+        if (computer==3){ Image=findViewById(R.id.rock); }
+        if(computer==2){Image=findViewById(R.id.scissors);}
+        if(computer==1) {Image=findViewById(R.id.paper);}
+        Image.setVisibility(View.VISIBLE);
+        if (computer==player){
             updateScore(1,1);
-            l= findViewById(R.id.l);
+
             l.setBackgroundColor(Color.parseColor("#F4A111"));
-            final Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    // Do something after 5s = 5000ms
-                    l.setBackgroundColor(Color.parseColor("#00F41111"));
-                }
-            }, 1000);
-
-
-        } else if ((player.equals("paper") && computer.equals("rock"))||(player.equals("scissor") && computer.equals("paper"))||(player.equals("rock") && computer.equals("scissor"))){
+        } else if ((player==1 && computer==3)||(player==2 && computer==1)||(player==3 && computer==2)){
             updateScore(0,1);
-            l= findViewById(R.id.l);
-            l.setBackgroundColor(Color.parseColor("#A4ED1E"));
 
-            final Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    // Do something after 5s = 5000ms
-                    l.setBackgroundColor(Color.parseColor("#00F41111"));
-                }
-            }, 1000);
+            l.setBackgroundColor(Color.parseColor("#A4ED1E"));
 
         }else{
             updateScore(1,0);
-            l= findViewById(R.id.l);
+
             l.setBackgroundColor(Color.parseColor("#F41111"));
 
-            final Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    // Do something after 5s = 5000ms
-                    l.setBackgroundColor(Color.parseColor("#00F41111"));
-                }
-            }, 1000);
-
-
-
         }
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Do something after 5s = 5000ms
+                Image.setVisibility(View.INVISIBLE);
+                l.setBackgroundColor(Color.parseColor("#00F41111"));
+            }
+        }, 1000);
     }
     public void paper(View view) {
-        whoWon("paper");
+        whoWon(1);
     }
     public void scissor(View view) {
-        whoWon("scissor");
+        whoWon(2);
     }
     public void rock(View view) {
 
-        whoWon("rock");
+        whoWon(3);
     }
 }
